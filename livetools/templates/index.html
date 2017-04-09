@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Live</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.css" type="text/css" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.js" ></script>
+
+  </head>
+  <body>
+
+	<div class="ui two column centered grid">
+	  <div class="row">
+		<h1>Hello</h1>
+	  </div>
+
+	  <div class="column">
+		{% for message in messages %}
+          {% module Template("comment.html", comment=message) %}
+		{% end %}
+	  </div>
+	  <div class="four column centered row">
+		<div class="column">b</div>
+		<div class="column">c</div>
+	  </div>
+	</div>
+
+  </body>
+</html>

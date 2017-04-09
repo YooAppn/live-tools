@@ -1,0 +1,2 @@
+tornado==4.4.3
+hypchat==0.21

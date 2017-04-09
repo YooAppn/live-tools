@@ -1,0 +1,9 @@
+# -*- coding: utf-8 -*-
+
+
+import livetools.chat
+
+
+
+if __name__ == "__main__":
+    livetools.chat.main()

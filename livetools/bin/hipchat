@@ -1,0 +1,10 @@
+# -*- coding: utf-8 -*-
+
+import livetools.hipchat_listener
+
+
+if __name__ == "__main__":
+	print('First00000000')
+	print(livetools.hipchat_listener.messages())
+	print('Second00000000')
+	print(livetools.hipchat_listener.messages())
