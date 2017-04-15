@@ -5,26 +5,62 @@
     <title>Live</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.css" type="text/css" />
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.js" ></script>
+
+    <link rel="stylesheet" href="{{ static_url("chat.css") }}" type="text/css" />
 
   </head>
   <body>
 
-	<div class="ui two column centered grid">
-	  <div class="row">
-		<h1>Hello</h1>
+	<div class="ui grid">
+
+	  <div class="ten wide column">
+		<h3 class="ui top attached header">Live</h3>
+		<div class="ui attached segment">
+		  <video style="width:100%;" controls></video>
+		</div>
+		<div class="ui attached segment">
+
+		<form class="ui form">
+		  <div class="field">
+			<div class="two fields">
+			  <div class="twelve wide field">
+				<input id="from" placeholder="うぇぶからです代理" value="うぇぶからです代理" type="text">
+			  </div>
+			  <div class="four wide field">
+				<select id="color" class="ui dropdown">
+				  <option selected value="yellow">yellow</option>
+				  <option value="green">Green</option>
+				  <option value="red">Red</option>
+				  <option value="random">Random</option>
+				</select>
+			  </div>
+			</div>
+		  </div>
+
+		  <div class="field ui fluid action input">
+			<input id="comment" placeholder="Comment (Enter)" type="text">
+			<button class="ui button" type="button">Say</button>
+		  </div>
+
+		</form>
+
+		</div>
 	  </div>
 
-	  <div class="column">
-		{% for message in messages %}
-          {% module Template("comment.html", comment=message) %}
-		{% end %}
+	  <div class="six wide column">
+		<h3 class="ui top attached header">Comment</h3>
+		<div class="ui attached segment comment-pane">
+		  <div class="ui comments" data-name="chat"></div>
+		</div>
 	  </div>
-	  <div class="four column centered row">
-		<div class="column">b</div>
-		<div class="column">c</div>
-	  </div>
+
 	</div>
 
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"
+			integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+			crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.js" ></script>
+
+	<script src="{{ static_url("chat.js") }}"></script>
   </body>
 </html>
