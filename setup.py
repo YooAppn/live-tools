@@ -17,6 +17,7 @@ setup(
     author_email='wooyoowaan@gmail.com',
     classifiers=[
         'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 2.7.9',
     ],
-    scripts=['livetools/bin/app'],
+    scripts=['livetools/bin/livetools'],
 )

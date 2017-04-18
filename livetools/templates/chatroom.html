@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Live</title>
+    <title>Comment Only Room</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.css" type="text/css" />
 
@@ -11,13 +11,14 @@
   </head>
   <body>
 
-	<div class="ui grid">
+	<div class="ui two column centered grid">
 
-	  <div class="ten wide column">
-		<h3 class="ui top attached header">Live (beta) active: <span id="active"></span></h3>
-		<div class="ui attached segment">
-		  <video style="width:100%;" controls></video>
+	  <div class="column">
+		<h3 class="ui top attached header">Chat (Beta なので怪しくなったらリロードしてください) active:<span id="active"></span></h3>
+		<div class="ui attached segment comment-pane">
+		  <div class="ui comments" data-name="chat"></div>
 		</div>
+
 		<div class="ui attached segment">
 
 		<form class="ui form">
@@ -44,13 +45,6 @@
 
 		</form>
 
-		</div>
-	  </div>
-
-	  <div class="six wide column">
-		<h3 class="ui top attached header">Comment</h3>
-		<div class="ui attached segment comment-pane">
-		  <div class="ui comments" data-name="chat"></div>
 		</div>
 	  </div>
 

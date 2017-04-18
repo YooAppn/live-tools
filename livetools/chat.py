@@ -26,7 +26,11 @@ MAX_WAIT_SECONDS_BEFORE_SHUTDOWN = 3
 
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
-        self.render("index.html", messages=[{'id':'test', 'text':'ttt'}])
+        self.render("index.html")
+
+class ChatroomHandler(tornado.web.RequestHandler):
+    def get(self):
+        self.render("chatroom.html")
 
 
 class Broadcaster(object):
@@ -60,7 +64,7 @@ class Broadcaster(object):
         msgs = cls.client.messages()
         if len(msgs) > 0:
             cls.update_cache(msgs)
-            cls.send({'comments':msgs})
+            cls.send({'comments':msgs, 'active': len(cls.channel)})
 
     @classmethod
     def interval_reload(cls):
@@ -84,13 +88,18 @@ class ChatSocketHandler(tornado.websocket.WebSocketHandler):
 
     def open(self):
         Broadcaster.channel.add(self)
-        Broadcaster.send({'comments':Broadcaster.cache})
+        Broadcaster.send({'comments':Broadcaster.cache, 'active': len(Broadcaster.channel)})
 
     def on_close(self):
         Broadcaster.channel.remove(self)
 
     def on_message(self, message):
         comment = json.loads(message)
+        if isinstance(comment['text'], unicode):
+            comment['text'] = comment['text'].encode('utf-8')
+            comment['from'] = comment['from'].encode('utf-8')
+            comment['color'] = comment['color'].encode('utf-8')
+
         Broadcaster.client.send(comment)
 
         Broadcaster.reload_and_notify()
@@ -128,6 +137,7 @@ def main():
     app = tornado.web.Application(
         [
             (r"/", MainHandler),
+            (r"/room", ChatroomHandler),
             (r"/chat", ChatSocketHandler),
         ],
         cookie_secret="__TODO:_GENERATE_YOUR_OWN_RANDOM_VALUE_HERE__",

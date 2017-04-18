@@ -24,6 +24,8 @@
 		if (event && event.data) {
 			var data = JSON.parse(event.data)
 			//console.log(data.comments);
+            //$('#active').text(data.active)
+			console.log(data);
 			data.comments.forEach(function(c) {
 				//console.log(c);
 				comment(c);

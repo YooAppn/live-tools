@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import threading
+import json
 
 from hypchat import HypChat
 
@@ -17,10 +18,13 @@ class HipClient(object):
 
     def to_dict(cls,m):
 
-        #print(m)
+        if isinstance(m['message'], unicode):
+            d = {'text': m['message'].encode('utf-8')}
+            d['from'] = m['from'].encode('utf-8') if isinstance(m['from'], unicode) else m['from']['name'].encode('utf-8')
+        else:
+            d = {'text': m['message']}
+            d['from'] = m['from'] if isinstance(m['from'], str) else m['from']['name']
 
-        d = {'text': m['message']}
-        d['from'] = m['from'] if isinstance(m['from'], str) else m['from']['name']
         d['color'] = m['color'] if 'color' in m else 'black'
         return d
 
