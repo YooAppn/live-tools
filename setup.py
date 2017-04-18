@@ -19,5 +19,9 @@ setup(
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 2.7.9',
     ],
+    data_files=[
+        ('livetools/statics', ['livetools/statics/chat.css', 'livetools/statics/chat.js']),
+        ('livetools/templates', ['livetools/templates/index.html', 'livetools/templates/chatroom.html']),
+        ],
     scripts=['livetools/bin/livetools'],
 )

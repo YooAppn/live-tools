@@ -21,12 +21,13 @@ define("debug", default=True, help="run in debug mode")
 
 define("api_token", default="no token", help="hipcaht api token")
 define("room_id", default=0, help="hipchat room id")
+define("hls_url", default='http://127.0.0.1:3000/hls/live/test.m3u8', help='hls url')
 
 MAX_WAIT_SECONDS_BEFORE_SHUTDOWN = 3
 
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
-        self.render("index.html")
+        self.render("index.html", hls_url=options.hls_url)
 
 class ChatroomHandler(tornado.web.RequestHandler):
     def get(self):
@@ -86,6 +87,9 @@ class Broadcaster(object):
 
 class ChatSocketHandler(tornado.websocket.WebSocketHandler):
 
+    def check_origin(self, origin):
+        return True
+
     def open(self):
         Broadcaster.channel.add(self)
         Broadcaster.send({'comments':Broadcaster.cache, 'active': len(Broadcaster.channel)})
@@ -136,7 +140,7 @@ def main():
     # http server
     app = tornado.web.Application(
         [
-            (r"/", MainHandler),
+            (r"/live", MainHandler),
             (r"/room", ChatroomHandler),
             (r"/chat", ChatSocketHandler),
         ],

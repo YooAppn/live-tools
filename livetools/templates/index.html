@@ -3,6 +3,10 @@
   <head>
     <meta charset="UTF-8">
     <title>Live</title>
+<!--
+    <link href="http://vjs.zencdn.net/5.19.0/video-js.css" rel="stylesheet">
+-->
+    <script src="https://cdn.jsdelivr.net/hls.js/latest/hls.min.js"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.css" type="text/css" />
 
@@ -14,9 +18,9 @@
 	<div class="ui grid">
 
 	  <div class="ten wide column">
-		<h3 class="ui top attached header">Live (beta) active: <span id="active"></span></h3>
+		<h3 class="ui top attached header">Live (alpha) active: <span id="active"></span></h3>
 		<div class="ui attached segment">
-		  <video style="width:100%;" controls></video>
+		  <video id="video" style="width:100%;" controls></video>
 		</div>
 		<div class="ui attached segment">
 
@@ -62,5 +66,16 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.js" ></script>
 
 	<script src="{{ static_url("chat.js") }}"></script>
+  <script>
+    if(Hls.isSupported()) {
+      var video = document.getElementById('video');
+      var hls = new Hls();
+      hls.loadSource('{{ hls_url }}');
+      hls.attachMedia(video);
+      hls.on(Hls.Events.MANIFEST_PARSED,function() {
+        video.play();
+    });
+   }
+  </script>
   </body>
 </html>

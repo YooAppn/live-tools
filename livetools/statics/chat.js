@@ -1,4 +1,4 @@
-(function(){
+   (function(){
 	var webSocket = undefined;
 
 	var template = function(color) {
@@ -23,9 +23,7 @@
 	var onMessage = function(event) {
 		if (event && event.data) {
 			var data = JSON.parse(event.data)
-			//console.log(data.comments);
-            //$('#active').text(data.active)
-			console.log(data);
+            $('#active').text(data.active)
 			data.comments.forEach(function(c) {
 				//console.log(c);
 				comment(c);
